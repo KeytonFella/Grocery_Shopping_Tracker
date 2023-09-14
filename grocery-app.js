@@ -38,7 +38,7 @@ What would you like to do? (Please input number)
                 rl.close();
                 break;
             default:
-                console.log('Invalid Command');
+                console.log('Invalid Command \n');
                 main();
                 break;
         }
@@ -46,14 +46,14 @@ What would you like to do? (Please input number)
 }
 
 function boughtItem(){
-    rl.question('What items did you buy?', (itemName) => {
+    rl.question('What items did you buy? \n', (itemName) => {
         for(key in groceryList){
             if(groceryList[key].name == itemName){
-                console.log(`${groceryList[key].name} marked as bought`);
+                console.log(`${groceryList[key].name} marked as bought \n`);
                 groceryList[key].bought = true;
                 main();
             }else{
-                console.log("Item not on list")
+                console.log("Item not on list \n")
                 boughtItem();
             }
         }
@@ -62,15 +62,27 @@ function boughtItem(){
 
 // remove item
 function removeItem(){   
-    rl.question('What would you like to remove?', (itemName) => {
+    rl.question('What would you like to remove? \n', (itemName) => {
+        let exists = false;
         for(key in groceryList){
             if(groceryList[key].name == itemName){
-                console.log(`${groceryList[key].name} removed from list`);
+                exists = true;
+                console.log(`${groceryList[key].name} removed from your list \n`);
                 groceryList = groceryList.filter((groceryItem) => {
                     return groceryItem.name !== itemName;
                 });
-                main();
-            }
+                rl.question('Would you like to remove anything else? (1. Yes 2. No) \n', (ans) => {
+                    if(ans == 1){
+                        removeItem();
+                    }else{
+                        main();
+                    }
+                })
+            }    
+        }
+        if(!exists){
+            console.log("Item not on list \n")
+            removeItem();
         }
     });
 }
@@ -78,15 +90,22 @@ function removeItem(){
 // add item
 function addItem(){
     let item = {};    
-    rl.question('What would you like to add : ', (itemName) => {    
-        rl.question('How many would you like to add : ', (itemQuantity) => {
-            rl.question('What is the price : ', (itemPrice) => {                       
+    rl.question('What would you like to add? \n', (itemName) => {    
+        rl.question('How many would you like to add? \n', (itemQuantity) => {
+            rl.question('What is the price? \n', (itemPrice) => {                       
                 item.name = itemName;
                 item.quantity = +itemQuantity;
                 item.price = +itemPrice;
                 item.bought = false;
                 groceryList.push(item);
-                main();
+                console.log(`${itemName} added to your list \n`)
+                rl.question('Would you like to add anything else? (1. Yes 2. No) \n', (ans) => {
+                    if(ans == 1){
+                        addItem();
+                    }else{
+                        main();
+                    }
+                })
             })
         })
     });
