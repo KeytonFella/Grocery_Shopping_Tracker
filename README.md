@@ -1,3 +1,6 @@
+TODO: make sure user inputs are valid and are the correct data types.
+
+
 # Grocery Shopping Tracker
 
 Create a Node.js application that is used to track grocery a grocery shopping list. This will be a console application that will display a grocery list created by the user. The user must be able to add an item to the list, the quantity, and the price of the item. Each item should also track whether or not it has been bought. The user should be able to remove items from the list when needed.
