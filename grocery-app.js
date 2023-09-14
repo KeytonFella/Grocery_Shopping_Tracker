@@ -71,18 +71,28 @@ function removeItem(){
                 groceryList = groceryList.filter((groceryItem) => {
                     return groceryItem.name !== itemName;
                 });
-                rl.question('Would you like to remove anything else? (1. Yes 2. No) \n', (ans) => {
-                    if(ans == 1){
-                        removeItem();
-                    }else{
-                        main();
-                    }
-                })
+                if(groceryList[0]){
+                    rl.question('Would you like to remove anything else? (1. Yes 2. No) \n', (ans) => {
+                        if(ans == 1){
+                            removeItem();
+                        }else{
+                            main();
+                        }
+                    })
+                }else{
+                    main();
+                }
             }    
         }
         if(!exists){
             console.log("Item not on list \n")
-            removeItem();
+            rl.question('Would you like to remove anything else? (1. Yes 2. No) \n', (ans) => {
+                if(ans == 1){
+                    removeItem();
+                }else{
+                    main();
+                }
+            })
         }
     });
 }
