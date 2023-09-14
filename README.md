@@ -1,4 +1,6 @@
-TODO: make sure user inputs are valid and are the correct data types.
+TODO: 
+make sure user inputs are valid and are the correct data types.
+make display nicer
 
 
 # Grocery Shopping Tracker
